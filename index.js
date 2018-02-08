@@ -6,7 +6,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.post('/', (req, res) => {
+app.post('/verify', (req, res) => {
   const swaggerUrl = req.body.swaggerUrl
   const authHeaders = req.body.authHeaders
   const operationId = req.body.operationId
@@ -17,7 +17,7 @@ app.post('/', (req, res) => {
 
 })
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(9999, () => console.log('Example app listening on port 9999!'))
 
 const makeApiCall = (swaggerUrl, authHeaders, operationId, requestBody) => {
   return Swagger(swaggerUrl, {
@@ -31,4 +31,7 @@ const makeApiCall = (swaggerUrl, authHeaders, operationId, requestBody) => {
         				},
         			})
     		})
+        .catch((err) => {
+          return err
+        })
 }
